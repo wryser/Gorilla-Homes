@@ -98,7 +98,7 @@ namespace GorillaHomes
                     {
                         foreach (Collider collider in parentAsset.GetComponentsInChildren<Collider>())
                         {
-                            Destroy(collider);
+                            collider.enabled = false;
                         }
                     }
                     home_info_stream = parentAsset.GetComponent<Text>().text;
@@ -167,7 +167,10 @@ namespace GorillaHomes
             /* This code will run regardless of if the mod is enabled*/
 
             inRoom = true;
-            LoadHome(homeIndex);
+            foreach (Collider collider in GameObject.Find("home.SandParent(Clone)").GetComponentsInChildren<Collider>())
+            {
+                collider.enabled = true;
+            }
         }
 
         /* This attribute tells Utilla to call this method when a modded room is left */
@@ -178,7 +181,10 @@ namespace GorillaHomes
             /* This code will run regardless of if the mod is enabled*/
 
             inRoom = false;
-            LoadHome(homeIndex);
+            foreach (Collider collider in GameObject.Find("home.SandParent(Clone)").GetComponentsInChildren<Collider>())
+            {
+                collider.enabled = false;
+            }
         }
     }
 }
