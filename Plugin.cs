@@ -94,11 +94,13 @@ namespace GorillaHomes
 
                     homebundle.Unload(false);
                     parentAsset.transform.position = new Vector3(-67.2225f, 11.57f, -82.611f);
-                    foreach (Collider collider in parentAsset.GetComponentsInChildren<Collider>())
+                    if (!inRoom)
                     {
-                        Destroy(collider);
+                        foreach (Collider collider in parentAsset.GetComponentsInChildren<Collider>())
+                        {
+                            Destroy(collider);
+                        }
                     }
-
                     home_info_stream = parentAsset.GetComponent<Text>().text;
                     home_info = home_info_stream.Split('$');
                     home_name.text = home_info[0].ToUpper();
@@ -165,6 +167,7 @@ namespace GorillaHomes
             /* This code will run regardless of if the mod is enabled*/
 
             inRoom = true;
+            LoadHome(homeIndex);
         }
 
         /* This attribute tells Utilla to call this method when a modded room is left */
@@ -175,6 +178,7 @@ namespace GorillaHomes
             /* This code will run regardless of if the mod is enabled*/
 
             inRoom = false;
+            LoadHome(homeIndex);
         }
     }
 }
